@@ -87,7 +87,18 @@ static void php_onepiece_init_globals(zend_onepiece_globals *onepiece_globals)
  */
 zend_class_entry * onepiece_ce;
 
+//定义方法
+ZEND_METHOD(OnePiece, public_method){
+        php_printf("一个public类型方法！\r\n");
+}
+
+ZEND_METHOD(OnePiece, __construct){
+        php_printf("__construct方法！\r\n");
+}
+
 static zend_function_entry onepiece_method[] = {
+	ZEND_ME(OnePiece, public_method, NULL, ZEND_ACC_PUBLIC)
+	ZEND_ME(OnePiece, __construct, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
 	{NULL, NULL, NULL}
 };
 
@@ -99,8 +110,10 @@ PHP_MINIT_FUNCTION(onepiece)
 	REGISTER_INI_ENTRIES();
 	*/
 	zend_class_entry ce;
-	INIT_CLASS_ENTRY(ce, "onepiece", onepiece_method);
+	INIT_CLASS_ENTRY(ce, "OnePiece", onepiece_method);
 	onepiece_ce = zend_register_internal_class(&ce TSRMLS_CC);
+	//定义属性
+	zend_declare_property_null(onepiece_ce, "public_var", strlen("public_var"), ZEND_ACC_PUBLIC TSRMLS_CC);
 	return SUCCESS;
 }
 /* }}} */
