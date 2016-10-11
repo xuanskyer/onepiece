@@ -1,0 +1,13 @@
+// $Id$
+// vim:ft=javascript
+
+// If your extension references something external, use ARG_WITH
+// ARG_WITH("onepiece", "for onepiece support", "no");
+
+// Otherwise, use ARG_ENABLE
+// ARG_ENABLE("onepiece", "enable onepiece support", "no");
+
+if (PHP_ONEPIECE != "no") {
+	EXTENSION("onepiece", "onepiece.c");
+}
+
