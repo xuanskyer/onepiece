@@ -85,11 +85,22 @@ static void php_onepiece_init_globals(zend_onepiece_globals *onepiece_globals)
 
 /* {{{ PHP_MINIT_FUNCTION
  */
+zend_class_entry * onepiece_ce;
+
+static zend_function_entry onepiece_method[] = {
+	{NULL, NULL, NULL}
+};
+
+
+
 PHP_MINIT_FUNCTION(onepiece)
 {
 	/* If you have INI entries, uncomment these lines 
 	REGISTER_INI_ENTRIES();
 	*/
+	zend_class_entry ce;
+	INIT_CLASS_ENTRY(ce, "onepiece", onepiece_method);
+	onepiece_ce = zend_register_internal_class(&ce TSRMLS_CC);
 	return SUCCESS;
 }
 /* }}} */
